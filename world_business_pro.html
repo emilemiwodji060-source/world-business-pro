@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101b35">
+<title>WORLD BUSINESS PRO</title>
+<style>
+:root{--bg:#0b1220;--panel:#121e33;--panel2:#182742;--line:#263956;--text:#eef4ff;--muted:#9aabc5;--blue:#4f8cff;--cyan:#39d5d0;--green:#2ecc91;--red:#ff6b78;--gold:#ffc857}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;background:var(--blue);color:white;font-weight:700}
+button.secondary{background:#263956}button.danger{background:#8f3344}button.good{background:#167a5a}
+input,select,textarea{width:100%;background:#0d1729;border:1px solid var(--line);color:var(--text);padding:11px;border-radius:9px;outline:none}
+label{display:block;color:var(--muted);font-size:13px;margin:9px 0 5px}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{background:#0e192c;border-right:1px solid var(--line);padding:22px 15px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{font-size:18px;font-weight:900;letter-spacing:.5px;margin:0 8px 4px}.brand span{color:var(--cyan)}.tag{font-size:11px;color:var(--muted);margin:0 8px 24px}
+.nav button{display:flex;width:100%;text-align:left;background:transparent;color:#b9c8df;margin:4px 0;padding:11px 12px;font-weight:600;border-radius:9px}.nav button.active,.nav button:hover{background:#1a2c49;color:white}
+.sidefoot{margin-top:25px;border-top:1px solid var(--line);padding:15px 8px;color:var(--muted);font-size:12px}
+main{min-width:0;padding:24px 28px 50px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.topbar h1{font-size:24px;margin:0}.top-actions{display:flex;gap:8px;align-items:center}.top-actions select{width:auto;min-width:90px}
+.page{display:none}.page.active{display:block}.muted{color:var(--muted)}.grid{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}.stat-label{color:var(--muted);font-size:13px}.stat-value{font-size:25px;font-weight:850;margin-top:7px}.stat-note{font-size:12px;color:var(--cyan);margin-top:4px}
+.two{grid-template-columns:1.25fr .75fr}.three{grid-template-columns:repeat(3,1fr)}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 12px}.section-title h2{font-size:17px;margin:0}
+table{width:100%;border-collapse:collapse;min-width:550px}th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:600}td{color:#e4edfb}.table-wrap{overflow:auto}
+.badge{display:inline-block;padding:4px 8px;border-radius:20px;background:#173e38;color:#6ce0b3;font-size:11px}.badge.warn{background:#473b1d;color:#ffd77a}.badge.off{background:#492532;color:#ff9dab}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 12px}.form-actions{display:flex;gap:8px;margin-top:15px;flex-wrap:wrap}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar input{max-width:260px}.empty{padding:25px;text-align:center;color:var(--muted)}
+.bar{height:9px;background:#263956;border-radius:20px;overflow:hidden;margin:8px 0}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:20px}
+.notice{border:1px solid #42608a;background:#142743;border-radius:12px;padding:13px;color:#c8d8f0;font-size:13px;margin:14px 0}
+.quick{display:flex;gap:8px;flex-wrap:wrap}.quick button{background:#1d3455}
+.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal.open{display:flex}.modal-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;width:min(560px,100%);max-height:90vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h3{margin:0}.close{background:#263956;padding:5px 10px}
+.toast{position:fixed;bottom:20px;right:20px;background:#173e38;color:#a9f5d6;padding:12px 16px;border-radius:10px;display:none;z-index:30}
+.mobile-menu{display:none}.small{font-size:12px}.danger-text{color:#ff9dab}.positive{color:#6ce0b3}
+@media(max-width:950px){.app{grid-template-columns:1fr}.sidebar{height:auto;position:relative;padding:13px}.brand{display:inline-block}.tag{display:inline-block;margin:0 0 0 8px}.nav{display:flex;overflow:auto;gap:5px;margin-top:12px}.nav button{white-space:nowrap;width:auto;margin:0}.sidefoot{display:none}main{padding:18px}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){main{padding:14px}.topbar{align-items:flex-start;flex-direction:column}.topbar h1{font-size:21px}.top-actions{width:100%;flex-wrap:wrap}.two,.three{grid-template-columns:1fr}.stats{gap:9px}.stat-value{font-size:21px}.form-grid{grid-template-columns:1fr}.toolbar input{max-width:none;flex:1}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">WORLD <span>BUSINESS</span> PRO</div>
+  <div class="tag">ONE PLATFORM. EVERY BUSINESS.</div>
+  <nav class="nav" id="nav">
+    <button class="active" data-page="dashboard">▦ <span data-i="dashboard">Tableau de bord</span></button>
+    <button data-page="clients">♙ <span data-i="clients">Clients</span></button>
+    <button data-page="products">▣ <span data-i="products">Produits & stocks</span></button>
+    <button data-page="sales">↗ <span data-i="sales">Ventes</span></button>
+    <button data-page="expenses">↘ <span data-i="expenses">Dépenses</span></button>
+    <button data-page="invoices">▤ <span data-i="invoices">Factures</span></button>
+    <button data-page="reports">▥ <span data-i="reports">Rapports</span></button>
+    <button data-page="assistant">✦ <span data-i="assistant">Business AI</span></button>
+    <button data-page="admin">♛ <span data-i="admin">Super Admin</span></button>
+    <button data-page="settings">⚙ <span data-i="settings">Paramètres</span></button>
+  </nav>
+  <div class="sidefoot">Version de démonstration locale<br>Les données restent sur cet appareil.</div>
+</aside>
+<main>
+<header class="topbar">
+  <div><div class="muted small">ESPACE DE GESTION</div><h1 id="pageTitle">Tableau de bord</h1></div>
+  <div class="top-actions">
+    <select id="lang" aria-label="Langue"><option value="fr">🇫🇷 Français</option><option value="en">🇬🇧 English</option></select>
+    <select id="currency" aria-label="Devise"><option value="XOF">XOF (FCFA)</option><option value="EUR">EUR (€)</option><option value="USD">USD ($)</option><option value="GBP">GBP (£)</option><option value="NGN">NGN (₦)</option></select>
+    <button class="secondary" id="exportData">Exporter données</button>
+  </div>
+</header>
+
+<section class="page active" id="page-dashboard">
+  <div class="notice">Bienvenue dans <b>WORLD BUSINESS PRO</b>. Gérez vos clients, produits, ventes et dépenses depuis un seul espace. Commencez par ajouter vos données : les indicateurs se mettront à jour automatiquement.</div>
+  <div class="grid stats">
+    <div class="card"><div class="stat-label">Chiffre d'affaires</div><div class="stat-value" id="kRevenue">0</div><div class="stat-note">Total des ventes enregistrées</div></div>
+    <div class="card"><div class="stat-label">Dépenses</div><div class="stat-value" id="kExpenses">0</div><div class="stat-note">Total des dépenses</div></div>
+    <div class="card"><div class="stat-label">Résultat estimé</div><div class="stat-value" id="kProfit">0</div><div class="stat-note">Ventes moins dépenses</div></div>
+    <div class="card"><div class="stat-label">Clients</div><div class="stat-value" id="kClients">0</div><div class="stat-note">Clients enregistrés</div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><div class="section-title"><h2>Activité récente</h2><span class="muted small">Dernières opérations</span></div><div id="recent"></div></div>
+    <div class="card"><div class="section-title"><h2>Accès rapide</h2></div><div class="quick"><button onclick="openModal('client')">+ Client</button><button onclick="openModal('product')">+ Produit</button><button onclick="openModal('sale')">+ Vente</button><button onclick="openModal('expense')">+ Dépense</button></div><div class="section-title"><h2>État du stock</h2></div><div id="stockSummary" class="muted">Aucun produit enregistré.</div></div>
+  </div>
+</section>
+
+<section class="page" id="page-clients">
+ <div class="section-title"><h2>Répertoire des clients</h2><button onclick="openModal('client')">+ Ajouter un client</button></div>
+ <div class="card"><div class="toolbar"><input id="clientSearch" placeholder="Rechercher un client..." oninput="renderClients()"></div><div class="table-wrap"><table><thead><tr><th>Nom</th><th>Téléphone</th><th>E-mail</th><th>Entreprise</th><th>Action</th></tr></thead><tbody id="clientsBody"></tbody></table></div></div>
+</section>
+
+<section class="page" id="page-products">
+ <div class="section-title"><h2>Catalogue et inventaire</h2><button onclick="openModal('product')">+ Ajouter un produit</button></div>
+ <div class="card"><div class="toolbar"><input id="productSearch" placeholder="Rechercher un produit..." oninput="renderProducts()"></div><div class="table-wrap"><table><thead><tr><th>Produit</th><th>Référence</th><th>Prix</th><th>Quantité</th><th>État</th><th>Action</th></tr></thead><tbody id="productsBody"></tbody></table></div></div>
+</section>
+
+<section class="page" id="page-sales">
+ <div class="section-title"><h2>Registre des ventes</h2><button onclick="openModal('sale')">+ Enregistrer une vente</button></div>
+ <div class="card"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Produit / description</th><th>Client</th><th>Quantité</th><th>Total</th><th>Action</th></tr></thead><tbody id="salesBody"></tbody></table></div></div>
+</section>
+
+<section class="page" id="page-expenses">
+ <div class="section-title"><h2>Suivi des dépenses</h2><button onclick="openModal('expense')">+ Ajouter une dépense</button></div>
+ <div class="card"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Motif</th><th>Catégorie</th><th>Montant</th><th>Action</th></tr></thead><tbody id="expensesBody"></tbody></table></div></div>
+</section>
+
+<section class="page" id="page-invoices">
+ <div class="section-title"><h2>Facturation</h2><span class="muted small">Créez une facture à partir d'une vente</span></div>
+ <div class="card"><div class="table-wrap"><table><thead><tr><th>N° facture</th><th>Date</th><th>Client</th><th>Description</th><th>Montant</th><th>Action</th></tr></thead><tbody id="invoicesBody"></tbody></table></div></div>
+</section>
+
+<section class="page" id="page-reports">
+ <div class="section-title"><h2>Rapports de gestion</h2><button class="secondary" onclick="window.print()">Imprimer le rapport</button></div>
+ <div class="grid three">
+  <div class="card"><div class="stat-label">Ventes enregistrées</div><div class="stat-value" id="rSales">0</div></div>
+  <div class="card"><div class="stat-label">Produits au catalogue</div><div class="stat-value" id="rProducts">0</div></div>
+  <div class="card"><div class="stat-label">Dépenses enregistrées</div><div class="stat-value" id="rExpenses">0</div></div>
+ </div>
+ <div class="card"><h2 class="section-title">Répartition financière</h2><div id="reportBars"></div></div>
+</section>
+
+<section class="page" id="page-assistant">
+ <div class="section-title"><h2>✦ Business AI Assistant</h2><span class="badge warn">Assistant local de démonstration</span></div>
+ <div class="card">
+  <p class="muted">Posez une question sur les données que vous avez enregistrées. Cet assistant utilise des règles locales et ne se connecte pas à un véritable modèle d'IA.</p>
+  <div class="quick">
+   <button class="secondary" onclick="askAI('Fais le bilan de mon activité')">Bilan de mon activité</button>
+   <button class="secondary" onclick="askAI('Quels produits ont un stock faible ?')">Stocks faibles</button>
+   <button class="secondary" onclick="askAI('Comment améliorer mes ventes ?')">Conseils de vente</button>
+  </div>
+  <label for="aiQuestion">Votre question</label><textarea id="aiQuestion" rows="3" placeholder="Ex. Comment se porte mon activité ?"></textarea>
+  <div class="form-actions"><button onclick="askAI()">Analyser</button></div>
+  <div class="notice" id="aiAnswer" style="display:none;white-space:pre-wrap"></div>
+ </div>
+</section>
+
+<section class="page" id="page-admin">
+ <div class="notice"><b>Espace Super Admin — aperçu.</b> Dans cette version locale, les chiffres concernent uniquement les données de cet appareil. La gestion réelle des comptes clients, abonnements et paiements nécessite un serveur sécurisé.</div>
+ <div class="grid stats">
+  <div class="card"><div class="stat-label">Clients de l'entreprise</div><div class="stat-value" id="aClients">0</div></div>
+  <div class="card"><div class="stat-label">Produits</div><div class="stat-value" id="aProducts">0</div></div>
+  <div class="card"><div class="stat-label">Ventes</div><div class="stat-value" id="aSales">0</div></div>
+  <div class="card"><div class="stat-label">Revenu enregistré</div><div class="stat-value" id="aRevenue">0</div></div>
+ </div>
+ <div class="card"><h2>Contrôles de démonstration</h2><p class="muted">Les outils de gestion des abonnés, des paiements, des rôles et des entreprises seront activés après connexion à un backend et à un prestataire de paiement.</p><span class="badge warn">Backend non connecté</span></div>
+</section>
+
+<section class="page" id="page-settings">
+ <div class="section-title"><h2>Paramètres de l'entreprise</h2></div>
+ <div class="card">
+  <div class="form-grid">
+   <div><label>Nom de l'entreprise</label><input id="businessName" placeholder="Ex. Ma Boutique"></div>
+   <div><label>Pays</label><select id="country"><option>Togo</option><option>Bénin</option><option>Côte d'Ivoire</option><option>Sénégal</option><option>France</option><option>Ghana</option><option>Nigeria</option><option>Autre</option></select></div>
+   <div><label>E-mail professionnel</label><input id="businessEmail" type="email" placeholder="contact@entreprise.com"></div>
+   <div><label>Téléphone</label><input id="businessPhone" placeholder="+228 ..."></div>
+  </div>
+  <div class="form-actions"><button onclick="saveSettings()">Enregistrer les paramètres</button><button class="secondary" onclick="resetDemo()">Réinitialiser les données locales</button></div>
+ </div>
+ <div class="notice"><b>À savoir :</b> cette application est une première version autonome. Les données sont enregistrées dans le stockage local du navigateur. Ne l'utilisez pas encore pour stocker des données sensibles ou gérer de vrais paiements.</div>
+</section>
+</main></div>
+
+<div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h3 id="modalTitle">Ajouter</h3><button class="close" onclick="closeModal()">✕</button></div><div id="modalContent"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='wbp_demo_v1';
+let db=JSON.parse(localStorage.getItem(KEY)||'{"clients":[],"products":[],"sales":[],"expenses":[],"invoices":[],"settings":{}}');
+let currentType='';
+const titles={dashboard:'Tableau de bord',clients:'Clients',products:'Produits & stocks',sales:'Ventes',expenses:'Dépenses',invoices:'Factures',reports:'Rapports',assistant:'Business AI',admin:'Super Admin',settings:'Paramètres'};
+const dict={en:{dashboard:'Dashboard',clients:'Clients',products:'Products & stock',sales:'Sales',expenses:'Expenses',invoices:'Invoices',reports:'Reports',assistant:'Business AI',admin:'Super Admin',settings:'Settings'}};
+function save(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function money(n){let c=document.getElementById('currency').value;try{return new Intl.NumberFormat(undefined,{style:'currency',currency:c,maximumFractionDigits:2}).format(Number(n)||0)}catch(e){return (Number(n)||0).toFixed(0)+' '+c}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
+function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===p));document.getElementById('pageTitle').textContent=titles[p];}
+document.getElementById('nav').addEventListener('click',e=>{let b=e.target.closest('button[data-page]');if(b)go(b.dataset.page)});
+document.getElementById('currency').addEventListener('change',renderAll);
+document.getElementById('lang').addEventListener('change',e=>{let en=e.target.value==='en';document.querySelectorAll('[data-i]').forEach(el=>{let k=el.dataset.i;el.textContent=en?(dict.en[k]||titles[k]):titles[k]});toast(en?'Some labels changed to English.':'Langue française sélectionnée.')});
+function rowEmpty(n){return `<tr><td colspan="${n}" class="empty">Aucune donnée pour le moment.</td></tr>`}
+function renderClients(){let q=(document.getElementById('clientSearch')?.value||'').toLowerCase();let a=db.clients.filter(x=>(x.name+x.phone+x.email+x.company).toLowerCase().includes(q));document.getElementById('clientsBody').innerHTML=a.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.phone)}</td><td>${esc(x.email)}</td><td>${esc(x.company)}</td><td><button class="danger" onclick="del('clients','${x.id}')">Supprimer</button></td></tr>`).join('')||rowEmpty(5)}
+function renderProducts(){let q=(document.getElementById('productSearch')?.value||'').toLowerCase();let a=db.products.filter(x=>(x.name+x.ref).toLowerCase().includes(q));document.getElementById('productsBody').innerHTML=a.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.ref)}</td><td>${money(x.price)}</td><td>${x.qty}</td><td><span class="badge ${x.qty<5?'warn':''}">${x.qty<5?'Stock faible':'Disponible'}</span></td><td><button class="danger" onclick="del('products','${x.id}')">Supprimer</button></td></tr>`).join('')||rowEmpty(6)}
+function renderSales(){document.getElementById('salesBody').innerHTML=db.sales.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.product)}</td><td>${esc(x.client||'—')}</td><td>${x.qty}</td><td>${money(x.total)}</td><td><button class="secondary" onclick="makeInvoice('${x.id}')">Facturer</button> <button class="danger" onclick="del('sales','${x.id}')">Supprimer</button></td></tr>`).join('')||rowEmpty(6)}
+function renderExpenses(){document.getElementById('expensesBody').innerHTML=db.expenses.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.name)}</td><td>${esc(x.cat)}</td><td>${money(x.amount)}</td><td><button class="danger" onclick="del('expenses','${x.id}')">Supprimer</button></td></tr>`).join('')||rowEmpty(5)}
+function renderInvoices(){document.getElementById('invoicesBody').innerHTML=db.invoices.map(x=>`<tr><td>${esc(x.no)}</td><td>${esc(x.date)}</td><td>${esc(x.client)}</td><td>${esc(x.description)}</td><td>${money(x.amount)}</td><td><button onclick="printInvoice('${x.id}')">PDF / Imprimer</button></td></tr>`).join('')||rowEmpty(6)}
+function renderAll(){
+ let rev=db.sales.reduce((s,x)=>s+Number(x.total),0),exp=db.expenses.reduce((s,x)=>s+Number(x.amount),0),profit=rev-exp;
+ document.getElementById('kRevenue').textContent=money(rev);document.getElementById('kExpenses').textContent=money(exp);document.getElementById('kProfit').textContent=money(profit);document.getElementById('kClients').textContent=db.clients.length;
+ renderClients();renderProducts();renderSales();renderExpenses();renderInvoices();
+ document.getElementById('recent').innerHTML=[...db.sales.map(x=>({d:x.date,t:'Vente : '+x.product,v:x.total})),...db.expenses.map(x=>({d:x.date,t:'Dépense : '+x.name,v:-x.amount}))].slice(-6).reverse().map(x=>`<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line)"><div><b>${esc(x.t)}</b><div class="muted small">${esc(x.d)}</div></div><b class="${x.v>=0?'positive':'danger-text'}">${money(x.v)}</b></div>`).join('')||'<div class="empty">Aucune activité enregistrée.</div>';
+ let low=db.products.filter(x=>x.qty<5);document.getElementById('stockSummary').innerHTML=low.length?low.map(x=>`<div style="padding:6px 0">${esc(x.name)} : <b class="danger-text">${x.qty}</b></div>`).join(''):'Tous les produits sont au-dessus du seuil de 5 unités.';
+ document.getElementById('rSales').textContent=db.sales.length;document.getElementById('rProducts').textContent=db.products.length;document.getElementById('rExpenses').textContent=db.expenses.length;
+ document.getElementById('reportBars').innerHTML=`<p>Ventes : <b>${money(rev)}</b></p><div class="bar"><span style="width:${rev+exp?rev/(rev+exp)*100:0}%"></span></div><p>Dépenses : <b>${money(exp)}</b></p><div class="bar"><span style="width:${rev+exp?exp/(rev+exp)*100:0}%"></span></div><p>Résultat estimé : <b>${money(profit)}</b></p>`;
+ ['aClients','aProducts','aSales'].forEach((id,i)=>document.getElementById(id).textContent=[db.clients.length,db.products.length,db.sales.length][i]);document.getElementById('aRevenue').textContent=money(rev);
+}
+function openModal(type){currentType=type;let forms={
+client:['Nouveau client', [['name','Nom complet','text'],['phone','Téléphone','text'],['email','E-mail','email'],['company','Entreprise','text']]],
+product:['Nouveau produit', [['name','Nom du produit','text'],['ref','Référence','text'],['price','Prix unitaire','number'],['qty','Quantité en stock','number']]],
+sale:['Nouvelle vente', [['product','Produit / description','text'],['client','Nom du client','text'],['qty','Quantité','number'],['unit','Prix unitaire','number']]],
+expense:['Nouvelle dépense', [['name','Motif','text'],['cat','Catégorie','text'],['amount','Montant','number']]]
+};let f=forms[type];document.getElementById('modalTitle').textContent=f[0];document.getElementById('modalContent').innerHTML=`<form id="entryForm"><div class="form-grid">${f[1].map(x=>`<div><label>${x[1]}</label><input name="${x[0]}" type="${x[2]}" ${x[2]==='number'?'min="0" step="any"':''} required></div>`).join('')}</div><div class="form-actions"><button type="submit">Enregistrer</button><button type="button" class="secondary" onclick="closeModal()">Annuler</button></div></form>`;
+ document.getElementById('entryForm').onsubmit=e=>{e.preventDefault();let d=Object.fromEntries(new FormData(e.target));d.id=crypto.randomUUID?crypto.randomUUID():String(Date.now());d.date=new Date().toLocaleDateString('fr-FR');if(type==='product'){d.price=+d.price;d.qty=+d.qty}if(type==='expense')d.amount=+d.amount;if(type==='sale'){d.qty=+d.qty;d.unit=+d.unit;d.total=d.qty*d.unit;let p=db.products.find(p=>p.name.toLowerCase()===d.product.toLowerCase());if(p)p.qty=Math.max(0,p.qty-d.qty)}db[type==='client'?'clients':type==='product'?'products':type==='sale'?'sales':'expenses'].push(d);closeModal();save();toast('Enregistrement effectué.')};document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function del(type,id){if(!confirm('Supprimer cet élément ?'))return;db[type]=db[type].filter(x=>x.id!==id);save();toast('Élément supprimé.')}
+function makeInvoice(id){let s=db.sales.find(x=>x.id===id);if(!s)return;let no='WBP-'+Date.now().toString().slice(-8);db.invoices.push({id:no,no,date:new Date().toLocaleDateString('fr-FR'),client:s.client||'Client',description:s.qty+' × '+s.product,amount:s.total});save();toast('Facture créée.')}
+function printInvoice(id){let x=db.invoices.find(i=>i.id===id);if(!x)return;let w=window.open('','_blank');if(!w){toast('Autorisez les fenêtres pop-up pour imprimer.');return}w.document.write(`<html><head><title>${x.no}</title><style>body{font:16px Arial;padding:40px;color:#172033}h1{color:#164b85}hr{margin:25px 0}</style></head><body><h1>WORLD BUSINESS PRO</h1><h2>FACTURE ${x.no}</h2><p>Date : ${x.date}</p><p>Client : ${esc(x.client)}</p><hr><p>${esc(x.description)}</p><h2>Total : ${money(x.amount)}</h2><p>Merci pour votre confiance.</p><script>window.print()<\/script></body></html>`);w.document.close()}
+function askAI(q){let question=q||document.getElementById('aiQuestion').value;let rev=db.sales.reduce((s,x)=>s+x.total,0),exp=db.expenses.reduce((s,x)=>s+x.amount,0),low=db.products.filter(x=>x.qty<5);let ans='';if(/stock/i.test(question))ans=low.length?'Produits à surveiller : '+low.map(x=>x.name+' ('+x.qty+')').join(', ')+'. Pensez à planifier le réapprovisionnement.':'Aucun produit enregistré n’est sous le seuil de 5 unités.';else if(/bilan|activité|résultat/i.test(question))ans=`Bilan local : ${db.sales.length} vente(s), ${db.clients.length} client(s), chiffre d'affaires ${money(rev)}, dépenses ${money(exp)} et résultat estimé ${money(rev-exp)}. Ces chiffres dépendent uniquement des données saisies.`;else ans='Conseils : suivez vos ventes chaque jour, identifiez vos produits les plus demandés, surveillez les stocks faibles, comparez les dépenses au chiffre d’affaires et conservez les justificatifs. Avec davantage de données, les rapports seront plus utiles.';let box=document.getElementById('aiAnswer');box.textContent=ans;box.style.display='block';document.getElementById('aiQuestion').value=question}
+function saveSettings(){db.settings={name:document.getElementById('businessName').value,country:document.getElementById('country').value,email:document.getElementById('businessEmail').value,phone:document.getElementById('businessPhone').value};save();toast('Paramètres enregistrés.')}
+function resetDemo(){if(!confirm('Effacer toutes les données enregistrées sur cet appareil ?'))return;db={clients:[],products:[],sales:[],expenses:[],invoices:[],settings:{}};save();toast('Données locales réinitialisées.')}
+document.getElementById('exportData').onclick=()=>{let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='world-business-pro-backup.json';a.click();URL.revokeObjectURL(a.href)};
+renderAll();
+if(db.settings){businessName.value=db.settings.name||'';country.value=db.settings.country||'Togo';businessEmail.value=db.settings.email||'';businessPhone.value=db.settings.phone||''}
+</script>
+</body></html>
